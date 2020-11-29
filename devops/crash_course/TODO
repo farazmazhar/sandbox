@@ -1,0 +1,18 @@
+DevOps Crash Course:
+    Read 'TODO' file of respective sections for more information.
+    ✔ Introduction @done(19-01-22 19:13)
+    ✔ Cloudformation @done(19-01-24 19:13)
+    ✔ Jenkins @done(19-01-25 19:13)
+    ✔ Docker @2d @done(19-01-30 17:09)
+    ✔ AWS AutoScaling and CloudWatch @done(19-02-01 11:22)
+    ✔ AWS SNS and SES @done(19-02-01 11:22)
+    ✔ CI/CD on AWS @done(19-02-01 11:22)
+    ✔ Applying CI/CD to Projects? @done(19-02-04 15:30)
+    ✘ Monitoring @cancelled(19-02-04 15:39)
+    ☐ Assignmnet: Defined in course.
+    ✔ Assignment: Cloudformation template that will: @done(19-02-04 12:57)
+        ✔ Create two IAM groups. @done(19-02-04 12:57)
+        ✔ A git repo with two branches. (probably dev and prod) @done(19-02-04 12:57)
+        ✔ One group has read only access. (say dev group has read only access to prod branch) @done(19-02-04 12:57)
+        ✔ The other group has full access. (say management group has full access to both branches) @done(19-02-04 12:57)
+    ☐ Exercise...

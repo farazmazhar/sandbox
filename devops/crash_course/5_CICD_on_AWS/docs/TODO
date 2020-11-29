@@ -1,0 +1,17 @@
+CI/CD on AWS:
+    Gettings started:
+        ✔ CodeCommit @done(19-01-31 16:12)
+        ✔ CodeBuild @done(19-01-31 18:50)
+        ✔ CodeDeploy @done(19-01-31 16:12)
+        ✔ CodePipeline @done(19-01-31 16:12)
+    Implementation:
+        ✔ CodePipeline 1: Deploying EC2 instance using CloudFormation template: @done(19-01-31 16:12)
+            ✔ CFN: Create a CF template for creating a EC2 instance. @done(19-01-31 16:12)
+            ✔ CCt: Push the template on to the git repo (built according to git flow). @done(19-01-31 16:12)
+            ✔ CCb: Build the code (probably, won't be required). @done(19-01-31 16:12)
+            ✔ CCd: Deploy the template to create the EC2 instance. @done(19-01-31 16:12)
+        ✔ CodePipeline 2: Creating a Lambda function with dependencies: @done(19-01-31 18:50)
+            ✔ CFN: Create CF template to create the Lambda functions with 'requirements.txt' and the code. @done(19-01-31 18:50)
+            ✔ CCt: Push the template on to the git repo (built according to git flow). @done(19-01-31 18:50)
+            ✔ CCb: Build the code (resolve dependencies here). @done(19-01-31 18:50)
+            ✔ CCd: Deploy the template to create the EC2 instance. @done(19-01-31 18:50)

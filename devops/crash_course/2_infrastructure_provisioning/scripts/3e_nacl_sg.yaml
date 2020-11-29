@@ -1,0 +1,63 @@
+# author: faraz mazhar
+
+AWSTemplateFormatVersion: 2010-09-09
+Description: This CF template will create NACL, and SG.
+
+Resources: 
+  fmNACl: 
+    Type: AWS::EC2::NetworkAcl
+    Properties:
+      VpcId: !ImportValue expVpcId      
+      Tags:
+      - Key: Name
+        Value: fm-nacl-cf
+  fmPublicSubnetNetworkAclAssociation: 
+    Type: AWS::EC2::SubnetNetworkAclAssociation
+    Properties:
+      SubnetId: !ImportValue expPublicSubnetId
+      NetworkAclId: !Ref fmNACl
+
+  fmSecGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: HTTP and SSH access.
+      VpcId: !ImportValue expVpcId
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      Tags:
+        - Key: Name
+          Value: fm-sg-cf
+
+Outputs:
+  fmNACL:
+    Description: NACL ID.
+    Value: !Ref fmNACl
+  fmSG:
+    Description: SG ID.
+    Value: !Ref fmSecGroup
+  expNaclId:
+    Description: NACL ID.
+    Value: !Ref fmNACl
+    Export:
+      Name: expNaclId
+  expSgId:
+    Description: SG ID.
+    Value: !Ref fmSecGroup
+    Export:
+      Name: expSgId

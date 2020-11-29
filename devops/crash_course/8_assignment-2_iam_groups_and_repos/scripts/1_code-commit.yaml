@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: This template creates a repo with two branches.
+
+Parameters: 
+  repoName:
+    Description: Name of the repo to be created.
+    Type: String
+    Default: faraz-repo-cfn-asgntwo
+
+Resources: 
+  fmCCrepo:
+    Type: AWS::CodeCommit::Repository
+    Properties:
+      RepositoryDescription: This is a very nice code commit repo. Created by Faraz Mazhar.
+      RepositoryName: !Ref repoName
+      DestinationArn: !ImportValue snsArn
+      Triggers:
+        Branches:
+          - master
+          - dev
+        Events:
+          - all
+        Name: very_nice_trigger
+
+Outputs:
+  repoId:
+    Description: Repo id?
+    Value: !Sub "arn:aws:codecommit:${AWS::Region}:${AWS::AccountId}:${repoName}"
+    Export: 
+      Name: repoId

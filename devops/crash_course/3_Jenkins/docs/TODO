@@ -1,0 +1,14 @@
+Jenkins:
+    Read 'readme.txt' for installation.
+    Testing: @today @critical 
+        ✔ Install Jenkins. @done(19-01-25 13:00)
+        ✔ Configure Jenkins. @done(19-01-25 13:10)
+        ✔ Create Pipeline. @done(19-01-25 15:17)
+        ✔ Test out the 'build' process. @done(19-01-25 15:17)
+        ✔ Test out the 'test' process @done(19-01-25 15:17)
+    Deploying: @today @high 
+        ✔ Installing Tomcat on EC2 instance. @done(19-01-25 17:45)
+        ✔ Deploying war files to Tomcat server. @done(19-01-25 17:45)
+    Scripting: @today @low 
+        ✔ Creating Jenkinfile. @done(19-01-25 19:15)
+        ✔ Testing Jenkinfile. @done(19-01-25 19:15)

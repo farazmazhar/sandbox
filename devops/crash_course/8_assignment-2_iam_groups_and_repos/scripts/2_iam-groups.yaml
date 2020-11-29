@@ -1,0 +1,63 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: This template creates IAM groups.
+
+Resources: 
+  managementGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: managementGroup
+      Policies:
+        - PolicyName: ManagementPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement: 
+              - Effect: Allow
+                Action: 
+                  - codecommit:*
+                Resource: !ImportValue repoId
+
+  devGroup:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: devGroup
+      Policies:
+        - PolicyName: DeveloperPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement: 
+              - Effect: Allow
+                Action: 
+                  - codecommit:*
+                Resource: !ImportValue repoId
+                Condition:
+                  StringEqualsIfExists:
+                    - codecommit:References
+                    - refs/heads/dev
+        - PolicyName: DeveloperPolicytwo
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement: 
+              - Effect: Allow
+                Action: 
+                  - codecommit:BatchGet*
+                  - codecommit:Get*
+                  - codecommit:Describe*
+                  - codecommit:List*"
+                  - codecommit:GitPull
+                Resource: !ImportValue repoId
+                Condition:
+                  StringEqualsIfExists:
+                    - codecommit:References
+                    - refs/heads/master
+
+Outputs:
+  managementGroup:
+    Description: Management Group ID.
+    Value: !Ref managementGroup
+    Export:
+      Name: mgmtGrpId
+  developGroup:
+    Description: Developer Group ID.
+    Value: !Ref devGroup
+    Export:
+      Name: devGrpId

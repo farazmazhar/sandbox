@@ -1,0 +1,23 @@
+# author: faraz mazhar
+
+AWSTemplateFormatVersion: 2010-09-09
+Description: This CF template will create EC2 instance public.
+
+Resources: 
+  PublicEC2instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: faraz-ec2-key
+      ImageId: ami-035be7bafff33b6b6
+      InstanceType: t2.micro
+      SecurityGroupIds:
+        - !ImportValue expSgId
+      SubnetId: !ImportValue expPublicSubnetId
+      Tags:
+        - Key: Name
+          Value: fm-ec2-in-public-cf
+
+Outputs:
+  PublicEC2instanceOut:
+    Description: Public IP of Bastion host.
+    Value: !GetAtt PublicEC2instance.PublicIp

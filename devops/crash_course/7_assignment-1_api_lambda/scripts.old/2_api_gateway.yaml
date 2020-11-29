@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Creates an API using API gateway.
+
+Resources: 
+  theAPI:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      EndpointConfiguration: 
+        Types:
+          - REGIONAL
+      Name: faraz-rest-api
+      Parameters:
+        String: String
+  
+  createGETmethod:
+    Type: AWS::ApiGateway::Method
+    Properties: 
+      AuthorizationType: NONE
+      HttpMethod: GET
+      RequestParameters:
+        method.request.querystring.name: true 
+      Integration:
+        Credentials: arn:aws:iam::aws:policy/AWSLambdaExecute
+        IntegrationHttpMethod: GET
+        RequestParameters:
+          integration.request.querystring.name: method.request.querystring.name
+        Type: AWS
+        Uri: arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:************:function:test:1
+        IntegrationResponses:
+          - StatusCode: 200
+            ResponseTemplates: {"application/json": "$input.json('$.body')"}
+      ResourceId: !GetAtt theAPI.RootResourceId
+      RestApiId: !Ref theAPI
+
+Outputs:
+  outApiId:
+    Description: API ID...
+    Value: !Ref theAPI

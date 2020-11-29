@@ -1,0 +1,93 @@
+# author: faraz mazhar
+# NetworkACL inbound/outbound rules are not implemented in this template.
+
+AWSTemplateFormatVersion: 2010-09-09
+Description: >
+  This is just for learning purposes. Making use of other sections would increase its flexibility.
+  This CFN script creates a VPC with one public and 
+  one private subnet with an instance in private subnet and 
+  two EC2 instance in each subnet. One of which would be a Bastion host.
+  Route table, route, nat, igw, igw attachment, elastic ip, route table association, nacl, sg. 
+  Created by Faraz Mazhar.
+Metadata: 
+  VPC:
+    Description: Very nice VPC.
+  PublicSubnet:
+    Description: Very nice public subnet.
+  PrivateSubnet:
+    Description: Very nice private subnet.
+  EC2inPrivateSubnet:
+    Description: Very nice EC2 instance in private subnet.
+  BastionHost:
+    Description: Very nice bastion host.
+
+Resources: 
+  createVPC:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      Tags:
+        - Key: Name
+          Value: faraz-vpc-cf-stack
+      TemplateURL: https://s3.amazonaws.com/faraz-s3-cfn/3a_vpc.yaml
+      TimeoutInMinutes: 5 
+
+  createSubnets:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      Tags:
+        - Key: Name
+          Value: faraz-subnet-cf-stack
+      TemplateURL: https://s3.amazonaws.com/faraz-s3-cfn/3b_subnets.yaml
+      TimeoutInMinutes: 5 
+    DependsOn: createVPC
+  
+  createRouteTables:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      Tags:
+        - Key: Name
+          Value: faraz-rt-cf-stack
+      TemplateURL: https://s3.amazonaws.com/faraz-s3-cfn/3c_route_table.yaml
+      TimeoutInMinutes: 5 
+    DependsOn: createSubnets
+
+  createIgwNatEip:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      Tags:
+        - Key: Name
+          Value: faraz-igw-nat-eip-cf-stack
+      TemplateURL: https://s3.amazonaws.com/faraz-s3-cfn/3d_igw_nat_eip.yaml
+      TimeoutInMinutes: 5 
+    DependsOn: createRouteTables
+  
+  createNaclSg:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      Tags:
+        - Key: Name
+          Value: faraz-nacl-sg-stack
+      TemplateURL: https://s3.amazonaws.com/faraz-s3-cfn/3e_nacl_sg.yaml
+      TimeoutInMinutes: 5 
+    DependsOn: createIgwNatEip
+  
+  createEC2:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      Tags:
+        - Key: Name
+          Value: faraz-ec2-stack
+      TemplateURL: https://s3.amazonaws.com/faraz-s3-cfn/3f_ec2.yaml
+      TimeoutInMinutes: 5 
+    DependsOn: createNaclSg
+  
+  createEC2private:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      Tags:
+        - Key: Name
+          Value: faraz-ec2-stack
+      TemplateURL: https://s3.amazonaws.com/faraz-s3-cfn/3g_ec2_private.yaml
+      TimeoutInMinutes: 5 
+    DependsOn: createEC2
+

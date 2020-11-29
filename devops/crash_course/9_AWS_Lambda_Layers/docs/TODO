@@ -1,0 +1,14 @@
+AWS Lambda Layers:
+    Getting Started:    
+        ✘ Documentation @cancelled(19-02-08 15:15)
+    Implementation:
+        Console:
+            ✔ Create a Layer. @done(19-02-07 18:38)
+            ✔ Use it. @done(19-02-07 18:38)
+        CLI:
+            ✘ Create a Layer. @cancelled(19-02-08 11:44)
+            ✘ Use it. @cancelled(19-02-08 11:44)
+        CodePipeline:
+            ✔ Create a pipeline to create the layer. @done(19-02-08 15:15)
+            ✔ Use it. @done(19-02-08 15:15)
+            

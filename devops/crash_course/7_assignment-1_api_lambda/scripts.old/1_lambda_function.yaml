@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Creates a Lambda Function.
+
+Resources: 
+  lambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: farazLambdaAssign1
+      Handler: lambda_function.lambda_handler
+      Role: arn:aws:iam::************:role/lambda_basic_execution
+      Runtime: python3.7
+      Code:
+        S3Bucket: faraz-raw-bucket
+        S3Key: assign-code.zip
+
+Outputs:
+  out:
+    Description: ID
+    Value: !Ref lambdaFunction

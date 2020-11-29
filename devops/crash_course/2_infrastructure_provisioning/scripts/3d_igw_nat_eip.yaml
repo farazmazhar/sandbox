@@ -1,0 +1,64 @@
+# author: faraz mazhar
+
+AWSTemplateFormatVersion: 2010-09-09
+Description: This CF template will create IGW, NAT, and EIP.
+
+Resources: 
+  fmIGW:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: fm-igw-cf
+  fmAttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !ImportValue expVpcId
+      InternetGatewayId: !Ref fmIGW
+  fmRouteToIGW:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !ImportValue expPublicRtId
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref fmIGW
+  fmNAT:
+    DependsOn: fmAttachGateway
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId:
+        Fn::GetAtt:
+        - fmEIP
+        - AllocationId
+      SubnetId: !ImportValue expPrivateSubnetId
+      Tags:
+        - Key: Name
+          Value: fm-NAT-cf
+  fmEIP:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+  RouteToNAT:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !ImportValue expPrivateRtId
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId:
+        Ref: fmNAT
+
+Outputs:
+  outIGW:
+    Description: IGW ID.
+    Value: !Ref fmIGW
+  outNAT:
+    Description: NAT ID.
+    Value: !Ref fmNAT
+  expIgw:
+    Description: IGW ID
+    Value: !Ref fmIGW
+    Export:
+      Name: expIgwId
+  expNat:
+    Description: NAT ID.
+    Value: !Ref fmNAT
+    Export:
+      Name: expNatId

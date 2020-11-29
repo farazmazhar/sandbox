@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Creates a SNS topic.
+
+Resources: 
+  snsTopic:
+      Type: AWS::SNS::Topic
+      Properties:
+        DisplayName: fmSNStopic
+        Subscription: 
+          - Endpoint: farazmazhar@sample.com
+            Protocol: email
+        TopicName: fm-sns-topic
+
+Outputs:
+  snsArn:
+    Description: SNS ARN
+    Value: !Ref snsTopic
+    Export: 
+      Name: snsArn

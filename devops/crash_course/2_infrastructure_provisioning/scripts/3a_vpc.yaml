@@ -1,0 +1,24 @@
+# author: faraz mazhar
+
+AWSTemplateFormatVersion: 2010-09-09
+Description: This CF template will create a VPC. 
+
+Resources: 
+ myVPC:
+   Type: AWS::EC2::VPC
+   Properties:
+     CidrBlock: 192.168.0.0/16
+     EnableDnsSupport: true
+     Tags:
+       - Key: Name
+         Value: faraz-vpc-cf
+
+Outputs:
+  outVPC:
+    Description: Returning VPCId.
+    Value: !Ref myVPC
+  expVpcId:
+    Description: Exporting VPC ID.
+    Value: !Ref myVPC
+    Export:
+      Name: expVpcId

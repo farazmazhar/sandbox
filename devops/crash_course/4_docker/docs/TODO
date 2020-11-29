@@ -1,0 +1,35 @@
+Docker: 
+    Read readme for more information.
+    Getting started:
+        ✔ Deep Dive videos. @started(19-01-28 12:20) @done(19-01-30 16:27) @lasted(2d4h7m6s)
+            ✔ Basics. @started(19-01-28 12:20) @done(19-01-28 20:15) @lasted(7h55m27s)
+            ✔ Dockerfile, Builds, and Network configuration. @done(19-01-29 16:39)
+            ✔ Commands and structures. @started(19-01-29 16:44) @done(19-01-29 19:36) @lasted(2h52m52s)
+            ✔ Integration and use cases. @started(19-01-29 19:37) @done(19-01-30 16:27) @lasted(20h50m5s)
+        ✔ Documentation. @started(19-01-28 12:20) @done(19-01-28 19:02) @lasted(6h42m48s)
+            ✔ Orientation @done(19-01-28 17:01)
+            ✔ Containters @done(19-01-28 17:01)
+            ✔ Services @done(19-01-28 17:01)
+            ✔ Swarms @started(19-01-28 17:01) @done(19-01-28 18:45) @lasted(1h44m5s)
+            ✘ Stacks @started(19-01-28 18:45) @cancelled(19-01-28 18:50) @wasted(5m56s)
+            ✘ Deploy your app @cancelled(19-01-28 18:50)
+    Installation:
+        ✔ Install on Ubuntu 18.04. @started(19-01-28 14:54) @done(19-01-28 15:12) @lasted(18m38s)
+        ✔ Configure on Ubuntu 18.04. @started(19-01-28 15:12) @done(19-01-28 15:12) @lasted(42s)
+    Implementation:
+        ✔ Dockerfile: Python applicaiton example. @started(19-01-28 15:23) @done(19-01-28 15:50) @lasted(27m34s)
+        ✔ Docker-compose/services: Docker compose example. @started(19-01-28 16:12) @done(19-01-28 16:59) @lasted(47m32s)
+        ✔ Docker Swarm: Docker swarm example. @started(19-01-28 17:17) @done(19-01-28 18:45) @lasted(1h28m6s)
+        ✘ Docker Stacks: Docker stacks example. @cancelled(19-01-28 18:50)
+        ✔ Pulling Ubuntu Xenial from Docker repo and testing it out. @done(19-01-28 20:15)
+        ✔ CentOS: Run as User. @done(19-01-29 12:05)
+        ✔ CentOS: Custom Message. @done(19-01-29 14:44)
+        ✔ Echo server: Echo server example. @done(19-01-29 14:52)
+        ✔ Entry point directive example. @done(19-01-29 15:04)
+        ✔ Expose directive example. @done(19-01-29 15:29)
+        ✔ Container volume management example. @done(19-01-29 15:52)
+        ✔ Docker Network: docker network example. @done(19-01-29 16:39)
+        ✔ Container Process: Container Process Inspect. @done(19-01-29 16:58)
+        ✔ Docker module 4, example 1: Web farm. @done(19-01-29 21:10)
+        ✔ Docker module 4, example 2: Tomcat and Java. @done(19-01-30 16:27)
+    

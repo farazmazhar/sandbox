@@ -1,0 +1,69 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: This is a copy of 1_ec_instance.yaml but introduces choice and makes use of more sections.
+Metadata: 
+  Instances:
+    Description: "This is just to make use of Metadata section. Very nice!"
+
+Parameters:
+  instanceTypeParam:
+    Type: String
+    Default: t2.micro
+    AllowedValues: [t2.micro]
+    Description: Param for the sake of a param.
+  sshKey:
+    Type: String
+    Default: faraz-ec2-key
+    Description: SSH key for EC2 instance.
+
+Mappings: 
+  RegionMap:
+    us-east-1:
+      AMI: ami-035be7bafff33b6b6
+    us-west-2:
+      AMI: ami-032509850cf9ee54e
+
+Resources: 
+  niceEC2isntance:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Ref sshKey
+      ImageId: 
+        Fn::FindInMap:
+          - RegionMap
+          - !Ref AWS::Region
+          - AMI
+      InstanceType: !Ref instanceTypeParam
+      SecurityGroupIds:
+        - !Ref secfmGroupName
+      UserData: 
+        Fn::Base64:
+          Fn::Join:
+          - ''
+          - - "#!/bin/bash -xe\n"
+            - echo 'Downloading PIP'
+            - curl -O https://bootstrap.pypa.io/get-pip.py'
+            - echo 'Executing PIP using Python'
+            - python get-pip.py'
+            - echo 'Setting PIP Classpath'
+            - echo 'export PATH=~/.local/bin:$PATH' >> ~/.bash_profile
+            - echo 'Reloading bash_profile'
+            - source ~/.bash_profile
+            - echo 'Installing AWS CLI'
+            - pip install awscli
+      Tags:
+        - Key: Name
+          Value: fm-ec2-very-nice
+  secfmGroupName:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Nice secgroup
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+
+Outputs:
+  EC2output:
+    Description: Public IP of the instance.
+    Value: !GetAtt niceEC2isntance.PublicIp

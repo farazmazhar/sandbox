@@ -1,0 +1,56 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: This is the parent template for the assignemnt that will call all the other templates.
+Metadata: 
+
+Parameters: 
+  repoName:
+    Description: Name of the repo to be created.
+    Type: String
+    Default: faraz-repo-cfn-asgntwo
+
+Resources: 
+  createSns:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      Tags:
+        - Key: Name
+          Value: faraz-sns-topic
+      TemplateURL: https://s3.amazonaws.com/faraz-raw-bucket/devops-assignment2/0a_sns.yaml
+      TimeoutInMinutes: 5 
+
+  createRepo:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      Tags:
+        - Key: Name
+          Value: faraz-codecommit-repo
+      TemplateURL: https://s3.amazonaws.com/faraz-raw-bucket/devops-assignment2/1_code-commit.yaml
+      TimeoutInMinutes: 5 
+    DependsOn: createSns
+
+  createGroups:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      Tags:
+        - Key: Name
+          Value: faraz-iam-groups
+      TemplateURL: https://s3.amazonaws.com/faraz-raw-bucket/devops-assignment2/2_iam-groups.yaml
+      TimeoutInMinutes: 5 
+    DependsOn: CreateRepo
+
+Outputs:
+  snsOut:
+    Description: SNS stack output.
+    Value: createSns.Outputs.snsArn
+  
+  repoOut:
+    Description: Repo stack output.
+    Value: createRepo.Outputs.repoId
+
+  groupsMOut:
+    Description: Groups stack output.
+    Value: createGroups.Outputs.managementGroup
+
+  groupsDOut:
+    Description: Groups stack output.
+    Value: createGroups.Outputs.devGrpId

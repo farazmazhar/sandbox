@@ -1,0 +1,13 @@
+Assignment 2 - IAM groups and CodeCommit repos:
+    Cloudformation Template - parent:
+        ✔ Create a parent template. @done(19-02-04 18:43)
+    Cloudformation Template - children:    
+        ✔ Code commit repo: @done(19-02-04 18:43)
+            ✔ branch: master. @done(19-02-04 18:43)
+            ✔ branch: develop. @done(19-02-04 18:43)
+        ✔ IAM groups: @done(19-02-04 18:43)
+            ✔ group: management. @done(19-02-04 18:43)
+            ✔ group: developers. @done(19-02-04 18:43)
+        ✔ Configuration: @done(19-02-04 18:43)
+            ✔ Management should have full access to both 'master' and 'develop' branch. @done(19-02-04 18:43)
+            ✔ Developers should have read-only access to 'master' but full access to 'develop' branch. @done(19-02-04 18:43)

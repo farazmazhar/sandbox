@@ -1,0 +1,15 @@
+-- THINGS TO DO --
+    - Stuff to read:
+        a. Template anatomy.
+        b. Signal, conditions, etc.
+        c. Sample template.
+
+    - User data:
+        a. Install Nginx.
+        b. Install CloudDeploy agent.
+
+    - Scripts:
+        a. Launch EC2 instance with user data.
+        b. Create a S3 bucket after the EC2 instance has been launched.
+
+        !Equals [!GetAtt AWS::IAM::User, 'arn:aws:iam::************:user/faraz.mazhar']

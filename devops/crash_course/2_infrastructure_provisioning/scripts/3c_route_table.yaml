@@ -1,0 +1,49 @@
+# author: faraz mazhar
+
+AWSTemplateFormatVersion: 2010-09-09
+Description: This CF template will create two route tables. 
+
+Resources:
+  publicRouteTable: 
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !ImportValue expVpcId
+      Tags:
+        - Key: Name
+          Value: faraz-public-route-table-cf
+  privateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !ImportValue expVpcId
+      Tags:
+        - Key: Name
+          Value: faraz-private-route-table-cf
+  publicRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !ImportValue expPublicSubnetId
+      RouteTableId: !Ref publicRouteTable
+  privateRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !ImportValue expPrivateSubnetId
+      RouteTableId: !Ref privateRouteTable
+
+Outputs:
+  outPublicRTid:
+    Description: Public Route Table ID.
+    Value: !Ref publicRouteTable
+  outPrivateRTid:
+    Description: Private Route Table ID.
+    Value: !Ref privateRouteTable
+  expPublicRtId:
+    Description: Exporting Public Route Table ID.
+    Value: !Ref publicRouteTable
+    Export:
+      Name: expPublicRtId
+  expPrivateRtId:
+    Description: Exporting Private Route Table ID.
+    Value: !Ref privateRouteTable
+    Export:
+      Name: expPrivateRtId
+  

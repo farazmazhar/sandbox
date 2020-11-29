@@ -1,0 +1,44 @@
+# author: faraz mazhar
+
+AWSTemplateFormatVersion: 2010-09-09
+Description: This CF template will create subnets. 
+
+Resources: 
+  publicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: us-east-1a
+      VpcId: !ImportValue expVpcId
+      CidrBlock: 192.168.0.0/17
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: faraz-public-subnet-cf
+  privateSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: us-east-1b
+      VpcId: !ImportValue expVpcId
+      CidrBlock: 192.168.128.0/17
+      Tags:
+        - Key: Name
+          Value: faraz-private-subnet-cf
+
+Outputs:
+  outPublicSubnet:
+    Description: Public Subnet ID.
+    Value: !Ref publicSubnet
+  outPrivateSubnet:
+    Description: Private Subnet ID.
+    Value: !Ref privateSubnet
+  expPublicSubnet:
+    Description: Exporting Public Subnet ID.
+    Value: !Ref publicSubnet
+    Export:
+      Name: expPublicSubnetId
+  expPrivateSubnet:
+    Description: Exporting Private Subnet ID.
+    Value: !Ref privateSubnet
+    Export:
+      Name: expPrivateSubnetId
+  

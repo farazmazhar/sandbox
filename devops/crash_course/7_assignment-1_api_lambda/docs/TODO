@@ -1,0 +1,22 @@
+Assignment 1 - Simple Lambda function and API gateway:
+    Getting started:
+        ✔ SAM docs. @done(19-02-07 15:51)
+        ✔ Lambda function docs. @done(19-02-07 15:51)
+        ✔ API gateway docs. @done(19-02-07 15:51)
+    Lambda:
+        ✔ Create a Lambda function. @done(19-02-07 15:51)
+        ✔ Should return "Hello {name}, welcome to {applicationTitle}." @done(19-02-07 16:17)
+            ✔ {name} is an qurey string parameter. @done(19-02-07 16:17)
+            ✔ {applicationTitle} is an environment variable. @done(19-02-07 16:17)
+    API gateway:
+        ✔ Create an API. @done(19-02-07 15:51)
+        ✔ Should take an qurey string parameter for {name}. @done(19-02-07 16:17)
+        ✔ Calling API should trigger Lambda function. @done(19-02-07 15:51)
+    CI/CD using SAM:
+        ✔ Implement CI/CD for above. @done(19-02-07 15:51)
+        ✔ Create a repo with: @done(19-02-07 15:51)
+            ✔ Code. @done(19-02-07 16:17)
+            ✔ Template. @done(19-02-07 15:51)
+        ✘ Show success and failure CI/CD scenarios. @cancelled(19-02-07 15:51)
+    Documentation:
+        ✔ Document what you did... readme.txt. @done(19-02-07 15:51)

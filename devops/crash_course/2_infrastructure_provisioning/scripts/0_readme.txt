@@ -1,0 +1,3 @@
+aws cloudformation create-stack --stack-name fmstackec2 --template-body file://1_ec2_instance.yaml --parameters ParameterKey=keyname,ParameterValue=faraz-ec2-key
+aws cloudformation create-stack --stack-name fmstke2new --template-body file://2_ec2_instance_with_choices.yaml --parameters ParameterKey=sshKey,ParameterValue=faraz-ec2-key ParameterKey=instanceTypeParam,ParameterValue=t2.micro
+aws cloudformation create-stack --stack-name fmstackvpc --template-body file://3_create_a_vpc.yaml
