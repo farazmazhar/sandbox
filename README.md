@@ -18,7 +18,7 @@ This is a repository containing things that I may have worked on or learnt along
 
 You can use the following to search for the specific topics.
 
-```sh
+```cmd
 Sandbox
 ├───apache_hadoop
 │   ├───apache_kafka
